@@ -1,0 +1,19 @@
+{
+  "name": "net-common-backend",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "common-backend",
+  "workspaceFolder": "/app",
+  "features": { "ghcr.io/devcontainers/features/docker-in-docker": {} },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "github.vscode-github-actions",
+        "GitHub.copilot",
+        "SonarSource.sonarlint-vscode"
+      ]
+    }
+  }
+}
