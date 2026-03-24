@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-and-scan",
+      "command": "sh",
+      "type": "process",
+      "args": ["/scripts/scan.sh"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "restore",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["restore"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "test",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["test"],
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}
