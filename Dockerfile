@@ -12,7 +12,7 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 && \
     nvm install --lts && \
     nvm install 20.12 && \
     dotnet tool install --global dotnet-sonarscanner --version 11.1.0 && \
-    useradd -u 5000 service-user && mkdir /app && chown -R service-user:service-user /app
+    useradd -u 5000 service-user && chown -R service-user:service-user /app
 ENV DOTNET_ROLL_FORWARD=Major
 COPY scan.sh /scripts/scan.sh
 RUN chmod +x /scripts/scan.sh
