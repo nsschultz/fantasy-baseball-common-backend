@@ -1,6 +1,6 @@
 {
   "name": "net-common-backend",
-  "dockerComposeFile": "../docker-compose.yaml",
+  "dockerComposeFile": "../.docker-compose/docker-compose-dev.yaml",
   "service": "common-backend",
   "workspaceFolder": "/app",
   "features": { "ghcr.io/devcontainers/features/docker-in-docker": {} },

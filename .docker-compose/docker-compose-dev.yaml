@@ -2,7 +2,7 @@ version: "3.8"
 services:
   common-backend:
     build:
-      context: .
+      context: ../
       dockerfile: Dockerfile
       target: ci
     restart: always

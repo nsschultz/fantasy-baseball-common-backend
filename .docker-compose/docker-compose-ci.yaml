@@ -1,7 +1,10 @@
 version: "3.8"
 services:
   api:
-    image: nschultz/fantasy-baseball-common-backend-ci:0.0.1
+    build:
+      context: ../
+      dockerfile: Dockerfile
+      target: ci
     command: sh /scripts/scan.sh
     depends_on:
       database:
