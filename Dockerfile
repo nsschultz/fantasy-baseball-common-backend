@@ -16,3 +16,4 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 && \
 ENV DOTNET_ROLL_FORWARD=Major
 COPY scan.sh /scripts/scan.sh
 RUN chmod +x /scripts/scan.sh
+USER service-user:service-user

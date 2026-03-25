@@ -9,8 +9,8 @@
 ### Build Images
 
 ```
-version=$(cat version.txt) && docker build -t nschultz/fantasy-baseball-common-backend-build:$version .
-version=$(cat version.txt) && docker build -t nschultz/fantasy-baseball-common-backend-ci:$version .
+version=$(cat version-image.txt) && docker build -t nschultz/fantasy-baseball-common-backend-build:$version .
+version=$(cat version-image.txt) && docker build -t nschultz/fantasy-baseball-common-backend-ci:$version .
 ```
 
 ---

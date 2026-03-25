@@ -14,7 +14,8 @@ Dockerfile
 Jenkinsfile
 LICENSE
 README.md
-version.txt
+version-image.txt
+version-library.txt
 # scanning data
 .sonarqube/
 coverage-hits/
