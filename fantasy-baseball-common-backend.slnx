@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="FantasyBaseball.Common/FantasyBaseball.Common.csproj" />
+  <Project Path="FantasyBaseball.Common.UnitTests/FantasyBaseball.Common.UnitTests.csproj" />
+</Solution>
