@@ -23,19 +23,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push build-stage
+      - name: Build and push
         uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          target: build
-          tags: nschultz/fantasy-baseball-common-backend-build:${{ env.VERSION }}
-      - name: Build and push ci-stage
-        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          target: ci
           tags: nschultz/fantasy-baseball-common-backend-ci:${{ env.VERSION }}

@@ -1,9 +1,7 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0
 ARG TARGETARCH
 ENV PATH="$PATH:/root/.dotnet/tools"
 WORKDIR /app
-
-FROM build AS ci
 RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2
 RUN apt-get update && apt-get install -y --no-install-recommends default-jre && \
     apt-get clean && \

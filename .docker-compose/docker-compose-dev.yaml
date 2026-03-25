@@ -4,7 +4,6 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile
-      target: ci
     restart: always
     command: sleep infinity
     environment:
