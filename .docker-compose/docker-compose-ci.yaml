@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  api:
+    image: nschultz/fantasy-baseball-common-backend-ci:0.0.1
+    command: sh /scripts/scan.sh
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - SERVICE=fantasy-baseball-common-backend
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - SONAR_TOKEN=${SONAR_TOKEN}
+    volumes:
+      - ../:/app/

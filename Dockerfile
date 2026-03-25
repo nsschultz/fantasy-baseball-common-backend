@@ -15,5 +15,5 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | b
     nvm install 20.12
 RUN dotnet tool install --global dotnet-sonarscanner --version 11.1.0
 ENV DOTNET_ROLL_FORWARD=Major
-COPY scripts/ /scripts
-RUN chmod +x /scripts/*.sh
+COPY scan.sh /scripts/scan.sh
+RUN chmod +x /scripts/scan.sh
