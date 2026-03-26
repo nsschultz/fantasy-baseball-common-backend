@@ -21,3 +21,6 @@ ENV DOTNET_ROLL_FORWARD=Major
 
 FROM dev AS ci
 COPY . .
+USER root
+RUN chown -R appuser:appuser /app
+USER appuser
