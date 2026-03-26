@@ -4,6 +4,7 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile
+      target: ci
     command: sh /scripts/scan.sh
     environment:
       - SERVICE=fantasy-baseball-common-backend

@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS dev
 ARG TARGETARCH
 WORKDIR /app
 RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 /usr/local/dotnet-tools /scripts && \
@@ -18,3 +18,6 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | b
     dotnet tool install --tool-path /usr/local/dotnet-tools dotnet-sonarscanner --version 11.1.0
 ENV PATH="$PATH:/usr/local/dotnet-tools:/home/appuser/.dotnet/tools"
 ENV DOTNET_ROLL_FORWARD=Major
+
+FROM dev AS ci
+COPY . .
