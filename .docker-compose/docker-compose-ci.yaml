@@ -2,10 +2,11 @@ version: "3.8"
 services:
   common-backend:
     build:
-      context: .
+      context: ../
       dockerfile: Dockerfile
       target: ci
-    restart: always
-    command: sleep infinity
+    command: sh /scripts/scan.sh
     environment:
       - SERVICE=fantasy-baseball-common-backend
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - SONAR_TOKEN=${SONAR_TOKEN}

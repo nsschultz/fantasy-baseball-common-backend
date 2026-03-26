@@ -6,22 +6,15 @@
 
 ---
 
-### Build Images
+### Build Image
 
 ```
-version=$(cat version.txt) && docker build -t nschultz/fantasy-baseball-common-backend-build:$version .
-version=$(cat version.txt) && docker build -t nschultz/fantasy-baseball-common-backend-ci:$version .
+version=$(cat version-image.txt) && docker build -t nschultz/fantasy-baseball-common-backend:$version .
 ```
 
 ---
 
 ### Dev Container
 
-- VS Code should auto-prompt to reopen the workspace in a contaienr, which will start the rest of the containers as well.
+- In VS Code, use the "Clone Repository into Container Volume..." option to open the workspace.
 - Tasks are setup in tasks.json.
-- Command for manually starting/stopping dev containers:
-
-```
-docker compose -f docker-compose.yaml -p fantasy-baseball-common-backend up --build -d
-docker compose -f docker-compose.yaml -p fantasy-baseball-common-backend down
-```

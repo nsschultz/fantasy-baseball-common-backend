@@ -1,6 +1,6 @@
 #!/bin/bash
 rm -rf coverage-results/
-VERSION=$(cat version.txt)
+VERSION=$(cat version-library.txt)
 dotnet sonarscanner begin \
   /o:"nsschultz" \
   /k:nsschultz_$SERVICE \
