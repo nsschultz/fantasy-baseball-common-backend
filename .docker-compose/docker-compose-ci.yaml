@@ -10,5 +10,3 @@ services:
       - SERVICE=fantasy-baseball-common-backend
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - SONAR_TOKEN=${SONAR_TOKEN}
-    volumes:
-      - ../:/app/
