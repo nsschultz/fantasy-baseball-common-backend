@@ -1,8 +1,8 @@
-using FantasyBaseball.Model.Enums;
+using FantasyBaseball.Common.Enums;
 using Xunit;
 using static FantasyBaseball.Common.Utility.EnumHelper;
 
-namespace FantasyBaseball.Model.UnitTests.Enums;
+namespace FantasyBaseball.Common.UnitTests.Enums;
 
 public class PlayerTypeTest
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FantasyBaseball.Model.Enums;
+namespace FantasyBaseball.Common.Enums;
 
 /// <summary>
 /// The type of player.
