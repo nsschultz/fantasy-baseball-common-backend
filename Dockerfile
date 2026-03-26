@@ -1,6 +1,6 @@
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0
 ARG TARGETARCH
-ENV PATH="$PATH:/root/.dotnet/tools"
+ENV PATH="$PATH:/usr/local/dotnet-tools"
 WORKDIR /app
 RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 && \
     apt-get update && apt-get install -y --no-install-recommends default-jre && \
@@ -11,9 +11,11 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 && \
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
     nvm install --lts && \
     nvm install 20.12 && \
-    dotnet tool install --global dotnet-sonarscanner --version 11.1.0 && \
-    useradd -u 5000 service-user && chown -R service-user:service-user /app
+    mkdir -p /usr/local/dotnet-tools && \
+    dotnet tool install --tool-path /usr/local/dotnet-tools dotnet-sonarscanner --version 11.1.0
 ENV DOTNET_ROLL_FORWARD=Major
 COPY scan.sh /scripts/scan.sh
-RUN chmod +x /scripts/scan.sh
-USER service-user:service-user
+RUN chmod +x /scripts/scan.sh && \
+    useradd --create-home --shell /bin/bash appuser && \
+    chown -R appuser:appuser /app /scripts
+USER appuser
