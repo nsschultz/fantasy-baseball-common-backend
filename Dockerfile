@@ -7,8 +7,7 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 /usr/local/dotnet-tools /sc
     rm -rf /var/lib/apt/lists/* && \
     useradd --create-home --shell /bin/bash appuser && \
     chown -R appuser:appuser /scripts /usr/local/dotnet-tools /app
-COPY scan.sh /scripts/scan.sh
-RUN chmod +x /scripts/scan.sh
+COPY --chmod=0755 scan.sh /scripts/scan.sh
 USER appuser
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \
     export NVM_DIR="$HOME/.nvm" && \
@@ -20,7 +19,4 @@ ENV PATH="$PATH:/usr/local/dotnet-tools:/home/appuser/.dotnet/tools"
 ENV DOTNET_ROLL_FORWARD=Major
 
 FROM dev AS ci
-COPY . .
-USER root
-RUN chown -R appuser:appuser /app
-USER appuser
+COPY --chown=appuser:appuser . .
