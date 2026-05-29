@@ -8,3 +8,5 @@ services:
     command: sleep infinity
     environment:
       - SERVICE=fantasy-baseball-common-backend
+    volumes:
+      - ../:/workspaces:cached
