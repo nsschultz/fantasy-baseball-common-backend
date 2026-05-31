@@ -12,5 +12,5 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 /usr/local/dotnet-tools /sc
     nvm install 20.12 && \
     dotnet tool install --tool-path /usr/local/dotnet-tools dotnet-sonarscanner --version 11.1.0
 COPY --chmod=0755 scan.sh /scripts/scan.sh
-ENV PATH="$PATH:/usr/local/dotnet-tools:/home/appuser/.dotnet/tools"
+ENV PATH="$PATH:/usr/local/dotnet-tools:/home/root/.dotnet/tools"
 ENV DOTNET_ROLL_FORWARD=Major
