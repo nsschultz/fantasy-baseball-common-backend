@@ -4,8 +4,14 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: read
+
 jobs:
   build-and-test:
+    permissions:
+      checks: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,12 +31,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Run Tests
-        run: dotnet test \
-          --configuration Release \
-          --no-restore \
-          --no-build \
-          --verbosity normal \
-          --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test --configuration Release --no-restore --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
 
       - name: Upload Test Results
         if: always()
@@ -82,6 +83,9 @@ jobs:
         run: dotnet format --verify-no-changes --verbosity diagnostic
 
   security-scan:
+    permissions:
+      security-events: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
