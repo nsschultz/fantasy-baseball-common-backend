@@ -43,7 +43,7 @@ jobs:
 
       - name: Publish Test Results
         if: always()
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2.26.0
         with:
           files: "**/test-results.trx"
           check_name: "Test Results"
@@ -101,7 +101,7 @@ jobs:
         run: dotnet restore
 
       - name: Run Trivy scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.24.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
