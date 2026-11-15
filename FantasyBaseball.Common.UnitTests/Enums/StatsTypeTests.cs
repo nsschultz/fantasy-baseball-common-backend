@@ -4,14 +4,14 @@ using static FantasyBaseball.Common.Utility.EnumHelper;
 
 namespace FantasyBaseball.Common.UnitTests.Enums;
 
-public class StatsTypeTest
+public class StatsTypeTests
 {
   [Theory]
   [InlineData(StatsType.CMBD, "Combined")]
   [InlineData(StatsType.PROJ, "Projected")]
   [InlineData(StatsType.YTD, "Year to Date")]
   [InlineData(StatsType.UNKN, "Unknown")]
-  public void GetDescriptionTest(StatsType type, string description) => Assert.Equal(description, GetDescription(type));
+  public void GetDescription_WithEnumValue_ReturnsCorrectDescription(StatsType type, string description) => Assert.Equal(description, GetDescription(type));
 
   [Theory]
   [InlineData(StatsType.CMBD, "Combined")]
@@ -20,7 +20,7 @@ public class StatsTypeTest
   [InlineData(StatsType.UNKN, "unknown")]
   [InlineData(StatsType.UNKN, "Something Else")]
   [InlineData(StatsType.UNKN, null)]
-  public void GetFromDescriptionTest(StatsType type, string desc) => Assert.Equal(type, GetFromDescription<StatsType>(desc));
+  public void GetFromDescription_WithDescription_ReturnsCorrectEnum(StatsType type, string desc) => Assert.Equal(type, GetFromDescription<StatsType>(desc));
 
   [Theory]
   [InlineData(StatsType.CMBD, "cmbd")]
@@ -29,5 +29,5 @@ public class StatsTypeTest
   [InlineData(StatsType.UNKN, "unKN")]
   [InlineData(StatsType.UNKN, "Something Else")]
   [InlineData(StatsType.UNKN, null)]
-  public void GetFromKeyTest(StatsType type, string key) => Assert.Equal(type, GetFromKey<StatsType>(key));
+  public void GetFromKey_WithKey_ReturnsCorrectEnum(StatsType type, string key) => Assert.Equal(type, GetFromKey<StatsType>(key));
 }

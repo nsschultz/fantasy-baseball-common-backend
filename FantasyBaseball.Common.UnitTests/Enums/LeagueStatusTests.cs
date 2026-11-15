@@ -4,14 +4,14 @@ using static FantasyBaseball.Common.Utility.EnumHelper;
 
 namespace FantasyBaseball.Common.UnitTests.Enums;
 
-public class LeagueStatusTest
+public class LeagueStatusTests
 {
   [Theory]
   [InlineData(LeagueStatus.A, "Available")]
   [InlineData(LeagueStatus.R, "Rostered")]
   [InlineData(LeagueStatus.X, "Unavailable")]
   [InlineData(LeagueStatus.S, "Scouted")]
-  public void GetDescriptionTest(LeagueStatus type, string description) => Assert.Equal(description, GetDescription(type));
+  public void GetDescription_WithEnumValue_ReturnsCorrectDescription(LeagueStatus type, string description) => Assert.Equal(description, GetDescription(type));
 
   [Theory]
   [InlineData(LeagueStatus.A, "Available")]
@@ -20,7 +20,7 @@ public class LeagueStatusTest
   [InlineData(LeagueStatus.S, "Scouted")]
   [InlineData(LeagueStatus.A, "")]
   [InlineData(LeagueStatus.A, null)]
-  public void GetFromDescriptionTest(LeagueStatus type, string desc) => Assert.Equal(type, GetFromDescription<LeagueStatus>(desc));
+  public void GetFromDescription_WithDescription_ReturnsCorrectEnum(LeagueStatus type, string desc) => Assert.Equal(type, GetFromDescription<LeagueStatus>(desc));
 
   [Theory]
   [InlineData(LeagueStatus.A, "a")]
@@ -29,5 +29,5 @@ public class LeagueStatusTest
   [InlineData(LeagueStatus.S, "s")]
   [InlineData(LeagueStatus.A, "")]
   [InlineData(LeagueStatus.A, null)]
-  public void GetFromKeyTest(LeagueStatus type, string key) => Assert.Equal(type, GetFromKey<LeagueStatus>(key));
+  public void GetFromKey_WithKey_ReturnsCorrectEnum(LeagueStatus type, string key) => Assert.Equal(type, GetFromKey<LeagueStatus>(key));
 }

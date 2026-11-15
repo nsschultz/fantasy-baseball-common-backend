@@ -15,7 +15,7 @@ public class ExceptionFilter : IActionFilter
       context.Result = new ObjectResult(bre.Message) { StatusCode = 400 };
       context.ExceptionHandled = true;
     }
-    if (context.Exception is ServiceException se)
+    else if (context.Exception is ServiceException se)
     {
       context.Result = new ObjectResult(se.Message) { StatusCode = 500 };
       context.ExceptionHandled = true;
@@ -26,6 +26,6 @@ public class ExceptionFilter : IActionFilter
   /// <param name="context">The ActionExecutingContext.</param>
   public void OnActionExecuting(ActionExecutingContext context)
   {
-    //Exception filtering isn't applied on executing actions
+    // No-op: exception filtering is only applied on executed actions, not during execution.
   }
 }

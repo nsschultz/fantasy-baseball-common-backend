@@ -28,7 +28,7 @@ public class BattingStatsTest
       OnBasePercentage = 0.45,
       SluggingPercentage = 0.72,
       OnBasePlusSlugging = 1.17,
-      ContractRate = 80,
+      ContactRate = 80,
       Power = 150,
       WalkRate = 12,
       Speed = 105,
@@ -52,7 +52,7 @@ public class BattingStatsTest
     Assert.Equal(0.45, battingStats.OnBasePercentage);
     Assert.Equal(0.72, battingStats.SluggingPercentage);
     Assert.Equal(1.17, battingStats.OnBasePlusSlugging);
-    Assert.Equal(80, battingStats.ContractRate);
+    Assert.Equal(80, battingStats.ContactRate);
     Assert.Equal(150, battingStats.Power);
     Assert.Equal(12, battingStats.WalkRate);
     Assert.Equal(105, battingStats.Speed);

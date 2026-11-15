@@ -58,7 +58,7 @@ public class BattingStats
   public double OnBasePlusSlugging { get; set; }
 
   /// <summary>Contact Rate (CT%)</summary>
-  public double ContractRate { get; set; }
+  public double ContactRate { get; set; }
 
   /// <summary>Linear Weighted Power Index (PX)</summary>
   public double Power { get; set; }

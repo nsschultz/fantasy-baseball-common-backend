@@ -13,8 +13,11 @@ public static class EnumHelper
   /// <returns>The description for the enum (empty string if the attribute isn't set).</returns>
   public static string GetDescription(Enum value)
   {
-    var attributes = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-    return attributes != null && attributes.Length > 0 ? (attributes[0] as DescriptionAttribute).Description : string.Empty;
+    ArgumentNullException.ThrowIfNull(value);
+    var field = value.GetType().GetField(value.ToString());
+    if (field == null) return string.Empty;
+    var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+    return attributes.Length > 0 ? ((DescriptionAttribute)attributes[0]).Description : string.Empty;
   }
 
   /// <summary>Gets the enum from the description (based on the DescriptionAttribute).</summary>

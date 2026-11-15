@@ -10,11 +10,15 @@ using Xunit;
 
 namespace FantasyBaseball.Common.UnitTests.Exceptions;
 
-public class ExceptionFilterTest
+public class ExceptionFilterTests
 {
-  [Fact] public void BadRequestExceptionTest() => ValidateExceptionHandling(new BadRequestException("Someone did something stupid"), 400);
+  [Fact]
+  public void OnActionExecuted_WithBadRequestException_Returns400StatusCode() => 
+    ValidateExceptionHandling(new BadRequestException("Someone did something stupid"), 400);
 
-  [Fact] public void ServiceExceptionTest() => ValidateExceptionHandling(new ServiceException("Something horrible happened"), 500);
+  [Fact]
+  public void OnActionExecuted_WithServiceException_Returns500StatusCode() => 
+    ValidateExceptionHandling(new ServiceException("Something horrible happened"), 500);
 
   private static void ValidateExceptionHandling(Exception e, int statusCode)
   {
