@@ -6,28 +6,28 @@ namespace FantasyBaseball.Common.UnitTests.Enums;
 
 public class StatsTypeTests
 {
-  [Theory]
-  [InlineData(StatsType.CMBD, "Combined")]
-  [InlineData(StatsType.PROJ, "Projected")]
-  [InlineData(StatsType.YTD, "Year to Date")]
-  [InlineData(StatsType.UNKN, "Unknown")]
-  public void GetDescription_WithEnumValue_ReturnsCorrectDescription(StatsType type, string description) => Assert.Equal(description, GetDescription(type));
+    [Theory]
+    [InlineData(StatsType.CMBD, "Combined")]
+    [InlineData(StatsType.PROJ, "Projected")]
+    [InlineData(StatsType.YTD, "Year to Date")]
+    [InlineData(StatsType.UNKN, "Unknown")]
+    public void GetDescription_WithEnumValue_ReturnsCorrectDescription(StatsType type, string description) => Assert.Equal(description, GetDescription(type));
 
-  [Theory]
-  [InlineData(StatsType.CMBD, "Combined")]
-  [InlineData(StatsType.PROJ, "ProjecTED")]
-  [InlineData(StatsType.YTD, "Year TO Date")]
-  [InlineData(StatsType.UNKN, "unknown")]
-  [InlineData(StatsType.UNKN, "Something Else")]
-  [InlineData(StatsType.UNKN, null)]
-  public void GetFromDescription_WithDescription_ReturnsCorrectEnum(StatsType type, string desc) => Assert.Equal(type, GetFromDescription<StatsType>(desc));
+    [Theory]
+    [InlineData(StatsType.CMBD, "Combined")]
+    [InlineData(StatsType.PROJ, "ProjecTED")]
+    [InlineData(StatsType.YTD, "Year TO Date")]
+    [InlineData(StatsType.UNKN, "unknown")]
+    [InlineData(StatsType.UNKN, "Something Else")]
+    [InlineData(StatsType.UNKN, null)]
+    public void GetFromDescription_WithDescription_ReturnsCorrectEnum(StatsType type, string? desc) => Assert.Equal(type, GetFromDescription<StatsType>(desc));
 
-  [Theory]
-  [InlineData(StatsType.CMBD, "cmbd")]
-  [InlineData(StatsType.PROJ, "PROJ")]
-  [InlineData(StatsType.YTD, "Ytd")]
-  [InlineData(StatsType.UNKN, "unKN")]
-  [InlineData(StatsType.UNKN, "Something Else")]
-  [InlineData(StatsType.UNKN, null)]
-  public void GetFromKey_WithKey_ReturnsCorrectEnum(StatsType type, string key) => Assert.Equal(type, GetFromKey<StatsType>(key));
+    [Theory]
+    [InlineData(StatsType.CMBD, "cmbd")]
+    [InlineData(StatsType.PROJ, "PROJ")]
+    [InlineData(StatsType.YTD, "Ytd")]
+    [InlineData(StatsType.UNKN, "unKN")]
+    [InlineData(StatsType.UNKN, "Something Else")]
+    [InlineData(StatsType.UNKN, null)]
+    public void GetFromKey_WithKey_ReturnsCorrectEnum(StatsType type, string? key) => Assert.Equal(type, GetFromKey<StatsType>(key));
 }

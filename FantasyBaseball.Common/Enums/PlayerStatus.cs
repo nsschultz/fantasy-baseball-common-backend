@@ -11,12 +11,12 @@ namespace FantasyBaseball.Common.Enums;
 ///</summary>
 public enum PlayerStatus
 {
-  /// <summary>Normal</summary>
-  [Description("")] XX = 0,
-  /// <summary>Injured List</summary>
-  [Description("Injured List")] IL = 1,
-  /// <summary>Not Available</summary>
-  [Description("Not Available")] NA = 2,
-  /// <summary>New Entry</summary>
-  [Description("New Entry")] NE = 3
+    /// <summary>Normal</summary>
+    [Description("")] XX = 0,
+    /// <summary>Injured List</summary>
+    [Description("Injured List")] IL = 1,
+    /// <summary>Not Available</summary>
+    [Description("Not Available")] NA = 2,
+    /// <summary>New Entry</summary>
+    [Description("New Entry")] NE = 3
 }
