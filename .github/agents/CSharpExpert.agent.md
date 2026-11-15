@@ -34,7 +34,7 @@ When invoked:
 - Don't add unused methods/params.
 - When fixing one method, check siblings for the same issue.
 - Reuse existing methods as much as possible
-- Add comments when adding public methods
+- Add XML documentation comments (`/// <summary>`) for all public methods, properties, classes, and enums
 - Move user-facing strings (e.g., AnalyzeAndConfirmNuGetConfigChanges) into resource files. Keep error/help text localizable.
 
 ## Error Handling & Edge Cases
@@ -42,6 +42,7 @@ When invoked:
 - **Null checks**: use `ArgumentNullException.ThrowIfNull(x)`; for strings use `string.IsNullOrWhiteSpace(x)`; guard early. Avoid blanket `!`.
 - **Exceptions**: choose precise types (e.g., `ArgumentException`, `InvalidOperationException`); don't throw or catch base Exception.
 - **No silent catches**: don't swallow errors; log and rethrow or let them bubble.
+- **Custom exceptions**: extend `Exception` and provide constructors for default message, custom message, and inner exception scenarios.
 
 ## Goals for .NET Applications
 
@@ -101,6 +102,7 @@ When invoked:
 
 - Always compile or check docs first if there is unfamiliar syntax. Don't try to correct the syntax if code can compile.
 - Don't change TFM, SDK, or `<LangVersion>` unless asked.
+- Verify all changes compile and tests pass before completing a task.
 
 # Async Programming Best Practices
 
@@ -119,15 +121,58 @@ When invoked:
 
 - Prefer records to classes for DTOs
 
+# Documentation Standards
+
+## XML Documentation Comments
+
+All public types, methods, and properties must have XML documentation comments:
+
+```csharp
+/// <summary>Brief one-line description of what this does.</summary>
+/// <param name="paramName">Description of the parameter.</param>
+/// <returns>Description of the return value.</returns>
+public string MyMethod(string paramName) { ... }
+```
+
+Guidelines:
+- Start with a verb for methods: "Gets", "Sets", "Calculates", "Validates", "Throws"
+- Use complete sentences ending with periods
+- For properties, describe what the property represents: "The player's MLB ID" or "The list of batting statistics"
+- For exceptions, document when they are thrown using `<exception>` tags when appropriate
+- For enums, document the enum class with all values explained in the summary
+
+Example enum documentation:
+```csharp
+/// <summary>
+/// The type of player in fantasy baseball.
+/// 0/U: Unknown - Type not determined
+/// 1/B: Batter - Offensive player
+/// 2/P: Pitcher - Defensive pitcher
+/// </summary>
+public enum PlayerType { ... }
+```
+
+## README Documentation
+
+The README should include:
+- Brief project description
+- Prerequisites and setup instructions
+- How to build and test
+- Architecture overview
+- Code quality and testing information
+- Contributing guidelines
+- Links to detailed documentation
+
 # Testing best practices
 
 ## Test structure
 
-- Separate test project: **`[ProjectName].Tests`**.
-- Mirror classes: `CatDoor` -> `CatDoorTests`.
-- Name tests by behavior: `WhenCatMeowsThenCatDoorOpens`.
+- Separate test project: **`[ProjectName].Tests`** or **`[ProjectName].UnitTests`**.
+- Mirror classes: `Player` -> `PlayerTests`.
+- Name tests by behavior: `WhenCatMeowsThenCatDoorOpens` or `HasEmptyCollectionsByDefault`.
 - Follow existing naming conventions.
 - Use **public instance** classes; avoid **static** fields.
+- Rename test files to use `Tests` suffix (e.g., `PlayerTests.cs`) for consistency with xUnit conventions.
 - No branching/conditionals inside tests.
 
 ## Unit Tests
@@ -138,12 +183,13 @@ When invoked:
 - Use clear assertions that verify the outcome expressed by the test name
 - Avoid using multiple assertions in one test method. In this case, prefer multiple tests.
 - When testing multiple preconditions, write a test for each
-- When testing multiple outcomes for one precondition, use parameterized tests
+- When testing multiple outcomes for one precondition, use parameterized tests (`[Theory]` with `[InlineData]`)
 - Tests should be able to run in any order or in parallel
 - Avoid disk I/O; if needed, randomize paths, don't clean up, log file locations.
 - Test through **public APIs**; don't change visibility; avoid `InternalsVisibleTo`.
 - Require tests for new/changed **public APIs**.
 - Assert specific values and edge cases, not vague outcomes.
+- Add tests for default values, boundary conditions, and all enum values when testing model classes.
 
 ## Test workflow
 
@@ -201,3 +247,43 @@ When invoked:
 - Avoid mocks/Fakes if possible
 - External dependencies can be mocked. Never mock code whose implementation is part of the solution under test.
 - Try to verify that the outputs (e.g. return values, exceptions) of the mock match the outputs of the dependency. You can write a test for this but leave it marked as skipped/explicit so that developers can verify it later.
+
+# Project-Specific Guidelines
+
+## Fantasy Baseball Common Backend
+
+This is a shared library project providing core models, enums, and utilities.
+
+### Key Principles
+- This is a **library project** (.NET 10.0 class library), not a standalone application
+- Focus on **reusability** across multiple backend services
+- Maintain **backward compatibility** - changes affect multiple downstream services
+- All public APIs must have **XML documentation**
+
+### Structure
+```
+FantasyBaseball.Common/
+├── Models/           - Data models (Player, Position, BattingStats, etc.)
+├── Enums/            - Standard enumerations (PlayerType, PlayerStatus, etc.)
+├── Exceptions/       - Custom exception types with HTTP error handling
+├── Utility/          - Helper methods (EnumHelper, MathHelper)
+└── Exceptions/       - Exception handling and filters
+```
+
+### Common Patterns
+
+**Exception Handling:**
+- Use `BadRequestException` for invalid input (HTTP 400)
+- Use `ServiceException` for internal errors (HTTP 500)
+- Both exceptions integrate with `ExceptionFilter` for automatic HTTP response mapping
+
+**Enums:**
+- Always provide `[Description]` attributes for enum values
+- Document all enum values in the class-level summary
+- Use concise keys (e.g., `B` for Batter, `P` for Pitcher)
+
+**Models:**
+- Use property auto-initialization for collections (`public List<T> Items { get; set; } = []`)
+- Apply `[JsonRequired]` to properties required during serialization
+- Add XML documentation for all public properties
+
