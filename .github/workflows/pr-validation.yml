@@ -43,7 +43,7 @@ jobs:
 
       - name: Publish Test Results
         if: always()
-        uses: EnricoMi/publish-unit-test-result-action@v2.26.0
+        uses: EnricoMi/publish-unit-test-result-action@da5b7be67623cd59bbbd1a0ce4f022050a55605f
         with:
           files: "**/test-results.trx"
           check_name: "Test Results"
