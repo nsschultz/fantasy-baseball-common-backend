@@ -11,12 +11,12 @@ namespace FantasyBaseball.Common.Enums;
 ///</summary>
 public enum StatsType
 {
-  /// <summary>Unknown Stats</summary>
-  [Description("Unknown")] UNKN = 0,
-  /// <summary>Year To Date Stats</summary>
-  [Description("Year to Date")] YTD = 1,
-  /// <summary>Projected Stats</summary>
-  [Description("Projected")] PROJ = 2,
-  /// <summary>Combined Stats</summary>
-  [Description("Combined")] CMBD = 3
+    /// <summary>Unknown Stats</summary>
+    [Description("Unknown")] UNKN = 0,
+    /// <summary>Year To Date Stats</summary>
+    [Description("Year to Date")] YTD = 1,
+    /// <summary>Projected Stats</summary>
+    [Description("Projected")] PROJ = 2,
+    /// <summary>Combined Stats</summary>
+    [Description("Combined")] CMBD = 3
 }

@@ -29,4 +29,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: nschultz/fantasy-baseball-common-backend:${{ env.VERSION }}
+          tags: |
+            nschultz/fantasy-baseball-common-backend:${{ env.VERSION }}
+            nschultz/fantasy-baseball-common-backend:latest

@@ -1,0 +1,32 @@
+using System;
+using FantasyBaseball.Common.Exceptions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Routing;
+using Xunit;
+
+namespace FantasyBaseball.Common.UnitTests.Exceptions;
+
+public class ExceptionFilterTests
+{
+    [Fact]
+    public void OnActionExecuted_WithBadRequestException_Returns400StatusCode() =>
+      ValidateExceptionHandling(new BadRequestException("Someone did something stupid"), 400);
+
+    [Fact]
+    public void OnActionExecuted_WithServiceException_Returns500StatusCode() =>
+      ValidateExceptionHandling(new ServiceException("Something horrible happened"), 500);
+
+    private static void ValidateExceptionHandling(Exception e, int statusCode)
+    {
+        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor(), new ModelStateDictionary());
+        var context = new ActionExecutedContext(actionContext, [], controller: null) { Exception = e };
+        new ExceptionFilter().OnActionExecuted(context);
+        var result = context.Result as ObjectResult;
+        Assert.Equal(statusCode, result.StatusCode);
+        Assert.Equal(e.Message, result.Value);
+    }
+}
