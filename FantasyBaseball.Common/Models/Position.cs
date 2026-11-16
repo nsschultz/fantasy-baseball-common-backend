@@ -8,10 +8,10 @@ namespace FantasyBaseball.Common.Models;
 public class Position
 {
     /// <summary>The position's code.</summary>
-    [JsonRequired] public string Code { get; set; }
+    [JsonRequired] public string Code { get; set; } = string.Empty;
 
     /// <summary>The full name of the position.</summary>
-    [JsonRequired] public string FullName { get; set; }
+    [JsonRequired] public string FullName { get; set; } = string.Empty;
 
     /// <summary>The type of player (batter or pitcher) that plays this position.</summary>
     [JsonRequired] public PlayerType PlayerType { get; set; }

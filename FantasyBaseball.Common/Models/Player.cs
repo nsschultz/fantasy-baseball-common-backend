@@ -18,10 +18,10 @@ public class Player
     [JsonRequired] public PlayerType Type { get; set; }
 
     /// <summary>The player's first name.</summary>
-    [JsonRequired] public string FirstName { get; set; }
+    [JsonRequired] public string FirstName { get; set; } = string.Empty;
 
     /// <summary>The player's last name.</summary>
-    [JsonRequired] public string LastName { get; set; }
+    [JsonRequired] public string LastName { get; set; } = string.Empty;
 
     /// <summary>The player's age.</summary>
     [JsonRequired] public int Age { get; set; }
@@ -57,7 +57,7 @@ public class Player
     public List<PitchingStats> PitchingStats { get; set; } = [];
 
     /// <summary>The player's team.</summary>
-    [JsonRequired] public PlayerTeam Team { get; set; }
+    [JsonRequired] public PlayerTeam? Team { get; set; }
 
     /// <summary>The position(s) this player plays.</summary>
     [JsonRequired] public List<Position> Positions { get; set; } = [];
