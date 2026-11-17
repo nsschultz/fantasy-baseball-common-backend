@@ -112,7 +112,7 @@ public class PositionTests
     [Fact]
     public void SetsNullAdditionalPositions()
     {
-        var position = new Position { AdditionalPositions = null };
+        var position = new Position { AdditionalPositions = null! };
         Assert.Null(position.AdditionalPositions);
     }
 }

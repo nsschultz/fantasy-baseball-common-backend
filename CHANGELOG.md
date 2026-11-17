@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New features in development
 
 ### Changed
-- Hardened GitHub Actions workflows with concurrency controls, job timeouts, and .NET package caching
+- Hardened GitHub Actions workflows with concurrency controls and job timeouts
 - Updated DevOps documentation to align with current workflow names and CI/CD behavior
 
 ### Deprecated
@@ -21,7 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed features
 
 ### Fixed
-- Bug fixes
+- Improved nullability annotations in `EnumHelper` to match runtime behavior for null enum lookup inputs
+- Removed nullable reference warnings from unit tests
 
 ### Security
 - Upgraded `Microsoft.OpenApi` to `3.11.1` to remove known high-severity vulnerabilities

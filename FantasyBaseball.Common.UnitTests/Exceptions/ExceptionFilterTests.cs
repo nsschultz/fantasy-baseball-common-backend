@@ -23,9 +23,10 @@ public class ExceptionFilterTests
     private static void ValidateExceptionHandling(Exception e, int statusCode)
     {
         var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor(), new ModelStateDictionary());
-        var context = new ActionExecutedContext(actionContext, [], controller: null) { Exception = e };
+        var context = new ActionExecutedContext(actionContext, [], controller: new object()) { Exception = e };
         new ExceptionFilter().OnActionExecuted(context);
         var result = context.Result as ObjectResult;
+        Assert.NotNull(result);
         Assert.Equal(statusCode, result.StatusCode);
         Assert.Equal(e.Message, result.Value);
     }
