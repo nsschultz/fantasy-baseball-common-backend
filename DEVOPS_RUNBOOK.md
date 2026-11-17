@@ -154,8 +154,7 @@ After resolution:
 # URL: https://github.com/nsschultz/fantasy-baseball-common-backend/actions
 
 # 2. Identify which workflow failed
-# - pr-validation.yml (PR build)
-# - sonar-scan.yml (quality scan)
+# - pr-validation.yml (build, test, formatting, security, and quality gate)
 # - nuget-package.yml (package publish)
 # - docker-image.yml (image build)
 
@@ -282,7 +281,7 @@ git push origin main
 # 2. If package not appearing
 
 # A. Check GitHub Actions workflow
-# - sonar-scan.yml should trigger nuget-package.yml
+# - nuget-package.yml publishes on push to main
 # - Check for publish step errors
 
 # B. Verify GitHub Packages is enabled
@@ -458,7 +457,7 @@ dotnet test /p:CollectCoverage=true
 # /d:sonar.coverage.exclusions="**/SomeClass.cs"
 
 # 4. Re-run analysis
-docker-compose -f .docker-compose/docker-compose-ci.yaml up --build
+docker compose -f .docker-compose/docker-compose-ci.yaml up --build
 ```
 
 ### Issue: Docker build fails with "FROM image not found"
@@ -593,7 +592,7 @@ dotnet pack FantasyBaseball.Common/FantasyBaseball.Common.csproj --configuration
 docker build -t nschultz/fantasy-baseball-common-backend:VERSION .
 
 # Docker run with CI environment
-docker-compose -f .docker-compose/docker-compose-ci.yaml up --build
+docker compose -f .docker-compose/docker-compose-ci.yaml up --build
 ```
 
 ---
