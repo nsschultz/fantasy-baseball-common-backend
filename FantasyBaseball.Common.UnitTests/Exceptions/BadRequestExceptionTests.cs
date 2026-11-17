@@ -14,6 +14,7 @@ public class BadRequestExceptionTests
     public void Constructor_WithMessage_SetsMessageProperty()
     {
         var exception = new BadRequestException("message", new Exception("inner message"));
+        Assert.NotNull(exception.InnerException);
         Assert.Equal("message", exception.Message);
         Assert.Equal("inner message", exception.InnerException.Message);
     }
