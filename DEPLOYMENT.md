@@ -282,25 +282,27 @@ git push origin main
 # - Create incident post-mortem
 ```
 
-## Automated Release Workflow
+## Automated CI/CD Workflow
 
-The GitHub Actions workflows automate the heavy lifting:
+The GitHub Actions workflows automate validation and publishing:
 
-### On Push to Main
+### On Pull Requests
 
-1. **sonar-scan.yml** triggers:
+1. **pr-validation.yml** runs:
    - Runs dotnet build
    - Runs dotnet test with coverage
    - Publishes coverage to SonarCloud
    - Quality gate check
 
-2. **nuget-package.yml** triggers:
+### On Push to Main
+
+1. **nuget-package.yml** triggers:
    - Reads version from version-library.txt
    - Packs FantasyBaseball.Common
    - Publishes to GitHub Packages
    - Automatically versioned
 
-3. **docker-image.yml** triggers:
+2. **docker-image.yml** triggers:
    - Reads version from version-image.txt
    - Builds multi-platform Docker images (amd64, arm64)
    - Pushes to Docker Hub
@@ -379,7 +381,7 @@ cat FantasyBaseball.Common/FantasyBaseball.Common.csproj | grep PackageId
 
 # 3. Run locally to debug
 cd /workspaces/fantasy-baseball-common-backend
-docker-compose -f .docker-compose/docker-compose-ci.yaml up --build
+docker compose -f .docker-compose/docker-compose-ci.yaml up --build
 ```
 
 ## Release Communication

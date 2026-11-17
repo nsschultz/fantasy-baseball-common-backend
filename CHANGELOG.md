@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New features in development
 
 ### Changed
-- Changes to existing functionality
+- Hardened GitHub Actions workflows with concurrency controls, job timeouts, and .NET package caching
+- Updated DevOps documentation to align with current workflow names and CI/CD behavior
 
 ### Deprecated
 - Features that will be removed soon
@@ -23,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bug fixes
 
 ### Security
-- Security vulnerability fixes
+- Upgraded `Microsoft.OpenApi` to `3.11.1` to remove known high-severity vulnerabilities
 
 ---
 
@@ -135,9 +136,10 @@ When upgrading to a new version:
 4. Review **Breaking Changes** section (required actions)
 5. Review **Security** fixes (important updates)
 
-### Latest Release: [1.1.0]
+### Latest Package Release: [1.1.0]
 
-Current stable version: **1.1.0**
+Current stable NuGet version: **1.1.0**  
+Current stable Docker image version: **1.1.2**
 
 Upgrade with:
 ```bash
