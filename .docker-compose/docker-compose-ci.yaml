@@ -3,6 +3,7 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile
+      target: ci
     command: sh /scripts/scan.sh
     environment:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
