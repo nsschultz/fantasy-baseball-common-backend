@@ -6,9 +6,7 @@ services:
       dockerfile: Dockerfile
     command: sh /scripts/scan.sh
     environment:
-      - SERVICE=fantasy-baseball-common-backend
       - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - SERVICE=fantasy-baseball-common-backend
       - SONAR_TOKEN=${SONAR_TOKEN}
       - VERSION=${VERSION}
-    volumes:
-      - ../:/app/
