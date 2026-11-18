@@ -381,7 +381,8 @@ cat FantasyBaseball.Common/FantasyBaseball.Common.csproj | grep PackageId
 
 # 3. Run locally to debug
 cd /workspaces/fantasy-baseball-common-backend
-docker compose -f .docker-compose/docker-compose-ci.yaml up --build
+sh .docker-compose/ci.sh
+# Test results are extracted to .docker-compose/test-results/
 ```
 
 ## Release Communication
@@ -405,6 +406,6 @@ After successful release:
 
 ---
 
-**Last Updated**: 2026-11-15  
+**Last Updated**: 2026-11-18  
 **Maintained By**: Development Team  
 **Questions?** See DEVOPS_RUNBOOK.md or SLO_SLA.md

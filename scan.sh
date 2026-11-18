@@ -1,5 +1,7 @@
 #!/bin/bash
 rm -rf coverage-results/
+rm -rf TestResults/
+mkdir -p TestResults/
 dotnet sonarscanner begin \
   /o:"nsschultz" \
   /k:nsschultz_$SERVICE \
@@ -15,6 +17,8 @@ dotnet test \
   "/p:CollectCoverage=true" \
   "/p:CoverletOutput=../coverage-results/" \
   "/p:CoverletOutputFormat=\"json,opencover\"" \
-  "/p:MergeWith=../coverage-results/coverage.json"
+  "/p:MergeWith=../coverage-results/coverage.json" \
+  --logger "trx;LogFileName=test-results.trx" \
+  --results-directory /app/TestResults
 dotnet publish -c Release -o /app/out -v minimal
 dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"

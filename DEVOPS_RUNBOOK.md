@@ -457,7 +457,8 @@ dotnet test /p:CollectCoverage=true
 # /d:sonar.coverage.exclusions="**/SomeClass.cs"
 
 # 4. Re-run analysis
-docker compose -f .docker-compose/docker-compose-ci.yaml up --build
+sh .docker-compose/ci.sh
+# Test results are extracted to .docker-compose/test-results/
 ```
 
 ### Issue: Docker build fails with "FROM image not found"
@@ -592,11 +593,11 @@ dotnet pack FantasyBaseball.Common/FantasyBaseball.Common.csproj --configuration
 docker build -t nschultz/fantasy-baseball-common-backend:VERSION .
 
 # Docker run with CI environment
-docker compose -f .docker-compose/docker-compose-ci.yaml up --build
+sh .docker-compose/ci.sh
 ```
 
 ---
 
-**Last Updated**: 2026-11-15  
+**Last Updated**: 2026-11-18  
 **Maintained By**: DevOps Team  
 **Next Review**: 2026-12-15
