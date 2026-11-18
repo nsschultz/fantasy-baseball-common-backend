@@ -140,7 +140,7 @@ When upgrading to a new version:
 ### Latest Package Release: [1.1.0]
 
 Current stable NuGet version: **1.1.0**  
-Current stable Docker image version: **1.1.2**
+Current stable Docker image version: **1.1.3**
 
 Upgrade with:
 ```bash
@@ -170,4 +170,4 @@ For issues with a specific version:
 
 ---
 
-**Last Updated**: 2026-11-15
+**Last Updated**: 2026-11-18

@@ -12,48 +12,11 @@ permissions:
   contents: read
 
 jobs:
-  build-and-test:
+  build-test-and-sonar:
     permissions:
       checks: write
       contents: read
       pull-requests: write
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 10.0.x
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Run Tests
-        run: dotnet test --configuration Release --no-restore --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: "**/TestResults/"
-
-      - name: Publish Test Results
-        if: always()
-        uses: EnricoMi/publish-unit-test-result-action@da5b7be67623cd59bbbd1a0ce4f022050a55605f
-        with:
-          files: "**/test-results.trx"
-          check_name: "Test Results"
-
-  sonar-quality-gate:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -72,8 +35,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           VERSION: ${{ env.VERSION }}
-        run: |
-          sh .docker-compose/ci.sh
+        run: sh .docker-compose/ci.sh
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ".docker-compose/test-results/"
+
+      - name: Publish Test Results
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@da5b7be67623cd59bbbd1a0ce4f022050a55605f
+        with:
+          files: ".docker-compose/test-results/**/*.trx"
+          check_name: "Test Results"
 
   code-format:
     runs-on: ubuntu-latest
