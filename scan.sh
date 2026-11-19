@@ -37,7 +37,7 @@ dotnet sonarscanner begin \
   /d:sonar.host.url="https://sonarcloud.io"
 
 # Build the code within the sonar context
-dotnet build -c Release
+dotnet build -c Debug
 
 # Find and process all test projects
 find . -type f \( -name "*Tests.csproj" -o -name "*Test.csproj" \) | while read test_project; do
