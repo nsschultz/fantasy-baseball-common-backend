@@ -37,7 +37,7 @@ dotnet sonarscanner begin \
   /d:sonar.host.url="https://sonarcloud.io"
 
 # Build the code within the sonar context
-dotnet build -c Debug
+dotnet build -c Debug --no-incremental --disable-build-servers
 
 # Find and process all test projects
 find . -type f \( -name "*Tests.csproj" -o -name "*Test.csproj" \) | while read test_project; do
@@ -48,7 +48,7 @@ find . -type f \( -name "*Tests.csproj" -o -name "*Test.csproj" \) | while read 
   
   dotnet test "$test_project" \
     "/p:CollectCoverage=true" \
-    "/p:CoverletOutput=../../coverage-results/" \
+    "/p:CoverletOutput=../coverage-results/" \
     "/p:CoverletOutputFormat=\"json,opencover\"" \
     "/p:MergeWith=../../coverage-results/coverage.json" \
     --logger "trx;LogFileName=$project_name.trx" \
