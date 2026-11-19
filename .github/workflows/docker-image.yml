@@ -41,3 +41,5 @@ jobs:
           tags: |
             nschultz/fantasy-baseball-common-backend:${{ env.VERSION }}
             nschultz/fantasy-baseball-common-backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

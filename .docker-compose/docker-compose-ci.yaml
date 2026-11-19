@@ -4,6 +4,10 @@ services:
       context: ../
       dockerfile: Dockerfile
       target: ci
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
     command: sh /scripts/scan.sh
     environment:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
