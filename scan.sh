@@ -36,6 +36,9 @@ dotnet sonarscanner begin \
   /d:sonar.exclusions="**/Database/Migrations/*.cs" \
   /d:sonar.host.url="https://sonarcloud.io"
 
+# Build the code within the sonar context
+dotnet build -c Release
+
 # Find and process all test projects
 find . -type f \( -name "*Tests.csproj" -o -name "*Test.csproj" \) | while read test_project; do
   test_dir=$(dirname "$test_project")
@@ -45,25 +48,12 @@ find . -type f \( -name "*Tests.csproj" -o -name "*Test.csproj" \) | while read 
   
   dotnet test "$test_project" \
     "/p:CollectCoverage=true" \
-    "/p:CoverletOutput=../../coverage-results/$project_name/" \
+    "/p:CoverletOutput=../../coverage-results/" \
     "/p:CoverletOutputFormat=\"json,opencover\"" \
-    "/p:MergeWith=../../coverage-results/$project_name/coverage.json" \
+    "/p:MergeWith=../../coverage-results/coverage.json" \
     --logger "trx;LogFileName=$project_name.trx" \
     --results-directory TestResults \
     --no-build
 done
 
-# Merge coverage reports from all test projects into a unified OpenCover report
-if [ -d "coverage-results" ] && [ "$(find coverage-results -name 'coverage.opencover.xml' | wc -l)" -gt 0 ]; then
-  echo "Merging coverage reports..."
-  dotnet tool install -g dotnet-reportgenerator-globaltool --version 5.3.14 || true
-  
-  reportgenerator \
-    -reports:coverage-results/*/coverage.opencover.xml \
-    -targetdir:coverage-results \
-    -reporttypes:OpenCoverSummary \
-    -assemblyfilters:"-xunit*"
-fi
-
-dotnet publish -c Release -o /app/out -v minimal
 dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
