@@ -1,14 +1,16 @@
-version: "3.8"
 services:
   common-backend:
     build:
       context: ../
       dockerfile: Dockerfile
+      target: ci
+      cache_from:
+        - type=gha
+      cache_to:
+        - type=gha,mode=max
     command: sh /scripts/scan.sh
     environment:
-      - SERVICE=fantasy-baseball-common-backend
       - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - SERVICE=fantasy-baseball-common-backend
       - SONAR_TOKEN=${SONAR_TOKEN}
       - VERSION=${VERSION}
-    volumes:
-      - ../:/app/

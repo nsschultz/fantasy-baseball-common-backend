@@ -35,8 +35,11 @@ jobs:
         uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25
         with:
           context: .
+          target: base
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             nschultz/fantasy-baseball-common-backend:${{ env.VERSION }}
             nschultz/fantasy-baseball-common-backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

@@ -1,22 +1,29 @@
 # compiled code
+
 **/bin
 **/obj
 out/
+
 # files not needed for build
-.deploy/
+
 .devcontainer/
 .docker-compose/
 .git/
+.githooks/
+.github/
 .vscode/
 .dockerignore
+.env.example
 .gitignore
 Dockerfile
 Jenkinsfile
 LICENSE
-README.md
+\*.md
 version-image.txt
 version-library.txt
+
 # scanning data
+
 .sonarqube/
 coverage-hits/
 coverage-results/

@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS base
 ARG TARGETARCH
 WORKDIR /app
 RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 /usr/local/dotnet-tools /scripts && \
@@ -14,3 +14,6 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man2 /usr/local/dotnet-tools /sc
 COPY --chmod=0755 scan.sh /scripts/scan.sh
 ENV PATH="$PATH:/usr/local/dotnet-tools:/home/root/.dotnet/tools"
 ENV DOTNET_ROLL_FORWARD=Major
+
+FROM base AS ci
+COPY . .

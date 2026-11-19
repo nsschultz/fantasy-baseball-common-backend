@@ -424,18 +424,31 @@ dotnet build
 # 1. Verify test project exists
 ls FantasyBaseball.Common.UnitTests/
 
-# 2. Check test file naming
+# 2. Check test project naming
+# scan.sh auto-discovers test projects matching:
+#   - *Tests.csproj (e.g., FantasyBaseball.Common.UnitTests.csproj)
+#   - *Test.csproj (e.g., ProjectName.Test.csproj)
+# Your project must follow one of these patterns
+
+# 3. Check test file naming
 # Should be: *Tests.cs or *Test.cs
 
-# 3. Check test class attributes
+# 4. Check test class attributes
 # Should have: [Fact] or [Theory] on test methods
 
-# 4. Run tests explicitly
+# 5. Run tests explicitly
 dotnet test FantasyBaseball.Common.UnitTests/FantasyBaseball.Common.UnitTests.csproj
 
-# 5. Check for compilation errors first
+# 6. Run all discovered test projects (like scan.sh does)
+find . -type f \( -name "*Tests.csproj" -o -name "*Test.csproj" \) | while read test_project; do
+  dotnet test "$test_project"
+done
+
+# 7. Check for compilation errors first
 dotnet build FantasyBaseball.Common.UnitTests/
 ```
+
+**Note**: The scan.sh script automatically discovers and runs all test projects. Each test project must follow the naming convention above to be discovered.
 
 ### Issue: SonarCloud reports "Coverage is below 80%"
 
@@ -449,16 +462,25 @@ dotnet build FantasyBaseball.Common.UnitTests/
 # 2. Add tests for new code
 git checkout -b test/coverage-improvement
 
-# Write tests
+# Write tests in existing test project or create a new one
+# Note: New test projects must match naming: *Tests.csproj or *Test.csproj
 dotnet test /p:CollectCoverage=true
 
-# 3. Or exclude if intentional
+# 3. Multi-project coverage merging
+# scan.sh automatically:
+# - Discovers all test projects (*Tests.csproj, *Test.csproj)
+# - Collects coverage individually per project
+# - Merges all coverage reports for SonarCloud
+# View merged report at: coverage-results/coverage.opencover.xml
+
+# 4. Or exclude if intentional
 # In scan.sh:
 # /d:sonar.coverage.exclusions="**/SomeClass.cs"
 
-# 4. Re-run analysis
+# 5. Re-run analysis
 sh .docker-compose/ci.sh
 # Test results are extracted to .docker-compose/test-results/
+# Individual .trx files per test project show which tests ran where
 ```
 
 ### Issue: Docker build fails with "FROM image not found"

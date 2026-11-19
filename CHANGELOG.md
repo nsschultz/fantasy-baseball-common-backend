@@ -8,11 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- New features in development
+- Multi-project test discovery and coverage gathering in scan.sh
+  - Automatically discovers test projects matching *Tests.csproj or *Test.csproj patterns
+  - Runs tests for each project with individual coverage collection
+  - Merges all OpenCover reports into a unified report for SonarCloud
+  - Each test project generates its own .trx result file for full traceability
 
 ### Changed
 - Hardened GitHub Actions workflows with concurrency controls and job timeouts
 - Updated DevOps documentation to align with current workflow names and CI/CD behavior
+- Enhanced scan.sh with comprehensive documentation header and improved error handling
 
 ### Deprecated
 - Features that will be removed soon

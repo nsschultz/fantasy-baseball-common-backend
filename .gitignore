@@ -13,5 +13,6 @@ coverage-hits/
 coverage-results/
 .docker-compose/test-results/
 out/
+TestResults/
 coverage.json
 opencovercoverage.xml

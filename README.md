@@ -77,8 +77,17 @@ The test suite covers:
 
 Run tests with:
 ```bash
+# Run all tests (all test projects)
 dotnet test
+
+# Run specific test project
+dotnet test FantasyBaseball.Common.UnitTests/
+
+# Run with coverage
+dotnet test /p:CollectCoverage=true
 ```
+
+**Multi-Project Testing**: The build process automatically discovers and runs all test projects matching the naming patterns `*Tests.csproj` or `*Test.csproj`, collecting and merging coverage reports for each.
 
 ### Contributing
 

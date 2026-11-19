@@ -290,9 +290,12 @@ The GitHub Actions workflows automate validation and publishing:
 
 1. **pr-validation.yml** runs:
    - Runs dotnet build
-   - Runs dotnet test with coverage
-   - Publishes coverage to SonarCloud
+   - Discovers and runs all test projects (*Tests.csproj, *Test.csproj)
+   - Collects individual coverage per test project
+   - Merges all coverage reports for SonarCloud
+   - Publishes merged coverage to SonarCloud
    - Quality gate check
+   - Publishes individual test results (.trx files) for each test project
 
 ### On Push to Main
 
@@ -378,11 +381,28 @@ cat FantasyBaseball.Common/FantasyBaseball.Common.csproj | grep PackageId
 # 2. Check scan.sh
 # - Verify version is passed correctly
 # - Verify project key format
+# - Verify all test projects are discovered (matching *Tests.csproj or *Test.csproj)
+# - Check that coverage reports are merged correctly
 
-# 3. Run locally to debug
+# 3. Check test project discovery
+# scan.sh discovers test projects with these patterns:
+#   - FantasyBaseball.Common.UnitTests.csproj
+#   - ProjectName.IntegrationTests.csproj
+#   - ProjectName.Test.csproj
+# Ensure your test projects follow one of these patterns
+
+# 4. Check output structure
+# After running, verify:
+#   - TestResults/ contains individual {ProjectName}.trx files
+#   - coverage-results/ contains merged coverage.opencover.xml
+#   - coverage-results/{ProjectName}/ contains individual coverage per project
+
+# 5. Run locally to debug
 cd /workspaces/fantasy-baseball-common-backend
 sh .docker-compose/ci.sh
 # Test results are extracted to .docker-compose/test-results/
+# Individual .trx files per test project show which tests came from where
+# Merged coverage-results/coverage.opencover.xml sent to SonarCloud
 ```
 
 ## Release Communication
