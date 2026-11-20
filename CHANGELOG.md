@@ -16,8 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Hardened GitHub Actions workflows with concurrency controls and job timeouts
-- Upgraded GitHub Actions workflow dependencies to Node.js 24-compatible major versions (replacing Node.js 20-based action versions)
+- Upgraded GitHub Actions workflow dependencies to Node.js 24-compatible major versions (replacing Node.js 20-based action versions), including `docker/setup-qemu-action`, `docker/login-action`, and `docker/build-push-action`
 - Updated DevOps documentation to align with current workflow names and CI/CD behavior
+- Updated DevOps agent documentation to remove explicit Node.js 20 references
 - Enhanced scan.sh with comprehensive documentation header and improved error handling
 - Updated `scan.sh` coverage merge path to use `../coverage-results/coverage.json` for multi-project coverage aggregation
 - Bumped Docker image version to `1.2.1` in `version-image.txt`
