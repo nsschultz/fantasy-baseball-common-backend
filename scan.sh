@@ -50,7 +50,7 @@ find . -type f \( -name "*Tests.csproj" -o -name "*Test.csproj" \) | while read 
     "/p:CollectCoverage=true" \
     "/p:CoverletOutput=../coverage-results/" \
     "/p:CoverletOutputFormat=\"json,opencover\"" \
-    "/p:MergeWith=../../coverage-results/coverage.json" \
+    "/p:MergeWith=../coverage-results/coverage.json" \
     --logger "trx;LogFileName=$project_name.trx" \
     --results-directory TestResults \
     --no-build

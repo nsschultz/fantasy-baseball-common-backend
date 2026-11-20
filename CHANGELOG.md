@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hardened GitHub Actions workflows with concurrency controls and job timeouts
 - Updated DevOps documentation to align with current workflow names and CI/CD behavior
 - Enhanced scan.sh with comprehensive documentation header and improved error handling
+- Updated `scan.sh` coverage merge path to use `../coverage-results/coverage.json` for multi-project coverage aggregation
+- Bumped Docker image version to `1.2.1` in `version-image.txt`
 
 ### Deprecated
 - Features that will be removed soon
