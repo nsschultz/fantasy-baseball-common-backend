@@ -130,7 +130,7 @@ Each phase feeds insights into the next, creating a continuous improvement cycle
 - **Dockerfile**: Multi-stage build with:
   - .NET 10 SDK base image with pinned digest
   - JRE for SonarScanner
-  - Node.js (LTS and 20.12) for tooling
+  - Node.js (current LTS) for tooling
   - Health check instruction
   - Security best practices
 
